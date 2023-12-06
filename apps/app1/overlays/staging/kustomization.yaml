@@ -3,7 +3,7 @@ kind: Kustomization
 
 helmCharts:
   - name: symfony
-    repo: oci://harbor.tech.glefer.fr/helm/symfony
+    repo: "oci://harbor.tech.glefer.fr/helm/symfony"
     version: "0.0.1"
     releaseName: app1
     namespace: app1
