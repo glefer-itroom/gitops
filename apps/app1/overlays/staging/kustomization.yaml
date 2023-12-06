@@ -7,6 +7,5 @@ helmCharts:
     version: "0.5.7"
     releaseName: mlflow-server
     namespace: my-namespace
-    valuesFile: values.yaml
     valuesInline:
       fullnameOverride: helloagain
