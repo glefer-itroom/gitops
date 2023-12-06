@@ -8,9 +8,3 @@ helmCharts:
     releaseName: mergestat
     namespace: admin
     version: 0.1.0
-    valuesFile: values.yaml
-
-patches:
-  - path: patches/node_affinity_deployment.yaml
-    target:
-      kind: Deployment
