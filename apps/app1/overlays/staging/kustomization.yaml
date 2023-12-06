@@ -1,12 +1,16 @@
-apiVersion: kustomize.config.k8s.io/v1beta1
-kind: Kustomization
-
-helmCharts:
-  - name: mlflow-server
-    repo: https://strangiato.github.io/helm-charts/
-    version: "0.5.7"
-    releaseName: mlflow-server
-    namespace: my-namespace
-    valuesFile: values.yaml
-    valuesInline:
-      fullnameOverride: helloagain
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: sealed-secrets
+  namespace: argocd
+spec:
+  project: default
+  source:
+    chart: sealed-secrets
+    repoURL: https://bitnami-labs.github.io/sealed-secrets
+    targetRevision: 1.16.1
+    helm:
+      releaseName: sealed-secrets
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: kubeseal
