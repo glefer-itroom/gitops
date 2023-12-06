@@ -4,19 +4,19 @@ metadata:
   name: root-application-set
 spec:
   generators:
-    - list:
-        elements:
-          - cluster: testing
-            url: https://194.163.161.136:6443
+    - clusters:
+        selector:
+          matchLabels:
+            argocd.argoproj.io/secret-type: cluster
   template:
     metadata:
-      name: '{{cluster}}-guestbook'
+      name: '{{name}}-guestbook'
     spec:
       project: default
       source:
-        repoURL: https://github.com/argoproj/argo-cd.git
-        targetRevision: HEAD
-        path: applicationset/examples/list-generator/guestbook/{{cluster}}
+        repoURL: https://github.com/glefer-itroom/gitops
+        targetRevision: main
+        path: apps/*/overslays/{{name}}
       destination:
-        server: '{{url}}'
+        server: '{{server}}'
         namespace: guestbook
