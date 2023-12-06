@@ -8,4 +8,4 @@ helmCharts:
     releaseName: app1
     namespace: app1
     valuesInline:
-      app.tag: 1.10.32
+      app.tag: 1.10.48
