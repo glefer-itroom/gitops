@@ -4,19 +4,27 @@ metadata:
   name: root-application-set
 spec:
   generators:
-    - clusters:
-        selector:
-          matchLabels:
-            argocd.argoproj.io/secret-type: cluster
+    # matrix 'parent' generator
+    - matrix:
+        generators:
+          - git:
+              repoURL: https://github.com/glefer-itroom/gitops
+              revision: main
+              directories:
+                - path: apps/*/overlays/*
+          - clusters:
+              selector:
+                matchLabels:
+                  argocd.argoproj.io/secret-type: cluster
   template:
     metadata:
-      name: '{{name}}-guestbook'
+      name: '{{path[1]}}-{{name}}'
     spec:
       project: default
       source:
         repoURL: https://github.com/glefer-itroom/gitops
         targetRevision: main
-        path: apps/*/overlays/{{name}}
+        path: '{{path}}'
       destination:
         server: '{{server}}'
         namespace: guestbook
