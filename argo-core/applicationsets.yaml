@@ -16,7 +16,7 @@ spec:
       source:
         repoURL: https://github.com/glefer-itroom/gitops
         targetRevision: main
-        path: apps/*/overslays/{{name}}
+        path: apps/*/overlays/{{name}}
       destination:
         server: '{{server}}'
         namespace: guestbook
